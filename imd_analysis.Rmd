@@ -1,0 +1,34 @@
+
+
+```{r}
+library(tidyverse)
+library(ggrepel)
+library(gghighlight)
+library(ggridges)
+library(tidytext)
+```
+
+
+```{r}
+df_ratings <- read.table(file = 'title_ratings.tsv', sep = '\t', header = TRUE)
+head(df_ratings)
+```
+
+```{r}
+library(ggplot2)
+plot <- ggplot(df_ratings, aes(x= numVotes, y = averageRating)) + geom_bin2d() +ggtitle("Score Moyen par nombre de votes") + labs(y="Score Moyen", x = "Num Votes")
+ggsave("imdb_0.png", plot, width=5, height = 4)
+
+```
+
+
+```
+
+
+```{r}
+plot <- ggplot(df_ratings, aes(x= numVotes, y = averageRating)) + geom_bin2d(binwidth=c(10,0.1)) + scale_x_log10(labels=comma) + scale_y_continuous(breaks = 0:10)
+
+ggsave("imdb_1.png", plot, width=4, height = 3)
+
+```
+
